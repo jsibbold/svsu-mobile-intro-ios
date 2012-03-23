@@ -1,0 +1,55 @@
+STEP 1:
+1. Create a new iPhone app using the new project wizard in Xcode
+   - Single-view application
+   - Use storyboards and automatic reference counting
+2. Modify the main storyboard
+   - Replace the default view controller with a navigation view controller
+   - Set the navigation view controller's root view controller to a table view controller
+3. Run the app in the simulator
+   - See a blank table
+
+STEP 2:
+1. Create a model object to represent a Movie from the movies JSON file
+   - Create new Objective-C class using the new file wizard called SVSUMovie
+   - Add properies in the header for each movie attribute that exists in the JSON
+   - Synthesize the properties in the implementation file
+   - Override the 'description' method to print the movie's title and year for logging
+2. Create an object that will load and parse the movies JSON file into an array of SVSUMovie objects
+   - Create new Objective-C class using the new file wizard called SVSUMoviesFetcher
+   - Add a class-level method in the header to retreive an array of movies
+   - Implement the method in the implementation file: parse the JSON and build the SVSUMovie objects, adding each one to an array
+3. Update the root view controller SVSUViewController
+   - Change the base class for the root view controller to UITableViewController
+   - Add a private member variable to hold the list of movies
+   - Add code to viewDidLoad to load the movies from SVSUMovieFetcher
+   - Log the list of movies
+4. Update the storyboard
+   - Change the custom class for the table view controller to SVSUViewController
+5. Run the app in the simulator
+   - See a blank table
+   - See the list of movies in the log window
+
+STEP 3:
+1. Implement the UITableViewDataSource methods in SVSUViewController
+   - Override tableView:numberOfRowsInSection: method to return the total number of movies
+   - Override tableView:cellForRowAtIndexPath: method to return the cell with movie data
+2. Run the app in the simulator
+   - See the list of movies in the table
+
+STEP 4:
+1. Create a new view controller class for the details view
+   - Create new Objective-C class using the new file wizard called SVSUMovieDetailsViewController that extends from UIViewController and implements the UITableViewDataSource protocol
+2. Add the details view controller to the main storyboard
+   - Drop a new view controller into the storyboard
+   - From the table view controller prototype cell, create a push segue to the new view controller, and set the identifier to "ViewMovieDetails"
+   - Change the custom class to SVSUMovieDetailsViewController
+   - Drop in the labels for the movie details and wire up the IBOutlets using the assistant view
+3. Implement the SVSUMovieDetailsViewController
+   - Add a property for the SVSUMovie to display details for
+   - In viewDidLoad, set the label values from the SVSUMovie
+   - Implement the UITableViewDataSource protocol methods to populate the movie stars
+4. Implement the segue from the table to the details view
+   - Implement prepareForSegue:sender: method in SVSUViewController, set the selected SVSUMovie object on the destination view controller
+5. Run the app in the simulator
+   - See the list of movies in the table
+   - Tap on a movie and see the movie details
